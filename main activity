@@ -1,0 +1,99 @@
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Switch;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Declaração dos componentes
+    TextView pergunta, aa, bb, cc, dd, resultado;
+    Switch a, b, c, d;
+
+    // Exemplo de perguntas e respostas
+    String[] perguntas = {
+            "Qual a capital do Brasil?",
+            "Quanto é 2 + 2?",
+
+    };
+
+    String[][] alternativas = {
+            {"São Paulo", "Rio de Janeiro", "Brasília", "Salvador"},
+            {"3", "4", "5", "6"},
+
+    };
+
+    int[] respostasCorretas = {2, 1}; // índices das respostas corretas (0 = primeira)
+
+    int perguntaAtual = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Inicialização
+        pergunta = findViewById(R.id.pergunta);
+        aa = findViewById(R.id.aa);
+        bb = findViewById(R.id.bb);
+        cc = findViewById(R.id.cc);
+        dd = findViewById(R.id.dd);
+        resultado = findViewById(R.id.resultado);
+
+        a = findViewById(R.id.a);
+        b = findViewById(R.id.b);
+        c = findViewById(R.id.c);
+        d = findViewById(R.id.d);
+    }
+
+    // Botão "Jogar"
+    public void jogar(View view) {
+
+        if (perguntaAtual < perguntas.length) {
+            pergunta.setText(perguntas[perguntaAtual]);
+            aa.setText(alternativas[perguntaAtual][0]);
+            bb.setText(alternativas[perguntaAtual][1]);
+            cc.setText(alternativas[perguntaAtual][2]);
+            dd.setText(alternativas[perguntaAtual][3]);
+
+            // Reset switches
+            a.setChecked(false);
+            b.setChecked(false);
+            c.setChecked(false);
+            d.setChecked(false);
+            resultado.setText("");
+
+        } else {
+            pergunta.setText("Fim do quiz!");
+            aa.setText("");
+            bb.setText("");
+            cc.setText("");
+            dd.setText("");
+        }
+    }
+
+    // Botão "Responder"
+    public void responder(View view) {
+        int respostaSelecionada = -1;
+
+        if (a.isChecked()) respostaSelecionada = 0;
+        else if (b.isChecked()) respostaSelecionada = 1;
+        else if (c.isChecked()) respostaSelecionada = 2;
+        else if (d.isChecked()) respostaSelecionada = 3;
+
+        if (respostaSelecionada == -1) {
+            resultado.setText("Selecione uma alternativa!");
+            return;
+        }
+
+        if (respostaSelecionada == respostasCorretas[perguntaAtual]) {
+            resultado.setText("ACERTOUUU!");
+        } else {
+            resultado.setText("ERROUUUU!");
+        }
+
+        perguntaAtual++;
+    }
+}
