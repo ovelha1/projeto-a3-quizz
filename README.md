@@ -31,4 +31,4 @@ O objetivo é demonstrar, de forma prática, como soluções computacionais pode
 ## 📖 Como executar
 1. Clone o repositório:  
    ```bash
-   git clone https://github.com/ovelha1/projeto-a3.git
+   git clone https://github.com/ovelha1/projeto-a3-quizz.git
